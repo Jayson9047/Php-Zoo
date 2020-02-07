@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+	This script demonstrates a form that uses GET method to be submitted to a server file called "animals.php". This script validates the user's information. And if all
+	the given information is correct it submits the form.The form is only submitted when the user clicks on the "Find Animal" button. When a submission is requested by the user
+	the script checks if all the given input is valid or not. The form doesn't get submitted until all the fields are filled up with valid syntax.
+-->
+<html>
+  <head>
+  <meta charset=“UTF-8”>
+  <title>PHP ZOO</title>
+  </head>
+  <script type="text/javascript">
+
+		//Name : validateInput
+		//Parameters: None
+		//returns: bool valid
+		//			True if all input is correct 
+		//			False if at least 1 input is left blank
+		//Description: This function is called on submission of the form. It checks if any field is empty. If a field is empty it returns false and the form is not submitted.  
+	 function validateInput()
+	{
+		var valid = true;
+		
+		var name = document.getElementById("inputName").value;
+		
+		//hide error message div
+		document.getElementById("nameError").style.display = "none";
+		document.getElementById("animalError").style.display = "none";
+		
+		//if name is not given show error message
+		if(name == "")
+		{
+			document.getElementById("nameError").style.display = "block";
+			document.getElementById("nameError").innerHTML = "Please enter a name";
+			valid = false;
+		}
+		
+		//if animal is not selected show error message
+		if(document.PHPForm.selectAnimal.value == 0)
+		{
+			document.getElementById("animalError").style.display = "block";
+			document.getElementById("animalError").innerHTML = "Please select an animal";
+			valid = false;
+		}	
+		
+		return valid;
+	}
+	 
+  </script>
+  <body>
+	<h1 align="center">The Zoo</h1>
+	<Form name= "PHPForm" action="/animals.php" method="POST" onsubmit="return validateInput()">
+	
+	<table>
+	  <tr>
+	  <td>Enter Your Name: </td>
+	  <td><input type="text" id="inputName" name="iName" placeholder="'John Smith' or 'John'"></td>
+	  <td><div id="nameError" style="color:red"></div></td>
+	  </tr>
+	  <tr>
+	  <td>Choose an animal: </td>
+	  <td><select name="selectAnimal">
+			<option value="0"></option>
+			<option value="Elephant">Elephant</option>
+			<option value="PolarBear">Polar Bear</option>
+			<option value="Peafowl">Peafowl</option>
+			<option value="Lion">Lion</option>
+			<option value="Tiger">Tiger</option>
+			<option value="Wolf">Wolf</option>
+	   </td>
+	   <td><div id="animalError" style="color:red"></div></td>
+	   </tr>
+	   </table>
+	   <input type="submit" id="submitted" value="Find Animal">
+	</Form>
+  </body>
+</html>
